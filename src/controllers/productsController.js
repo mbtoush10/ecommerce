@@ -67,19 +67,6 @@ async function createProduct(req, res) {
       sku,
     } = req.body;
 
-    if (!category_id || !name || price === undefined || !sku) {
-      return res.status(400).json({
-        success: false,
-        message: "category_id, name, price and sku are required",
-      });
-    }
-
-    if (Number(price) <= 0 || Number(stock_quantity) < 0) {
-      return res.status(400).json({
-        success: false,
-        message: "Price must be positive and stock cannot be negative",
-      });
-    }
 
     // Parameterized Query عشان ما يصير عندي SQL Injection
     const result = await pool.query(

@@ -75,6 +75,16 @@
         {
           "name": "Create Product - Valid",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg2MjE3OTYxLCJleHAiOjE3ODYyMjE1NjF9.efTnD0C8zEC17a3r0i8C8KQ3LKrJOB5u_3Pyfu6LYUM",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "POST",
             "header": [],
             "body": {
@@ -102,13 +112,13 @@
           "response": []
         },
         {
-          "name": "Create Product - Missing Name",
+          "name": "Create Product -  No Token (401)",
           "request": {
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"category_id\": 3,\r\n  \"name\": \"\",\r\n  \"description\": \"High-performance wireless gaming mouse with RGB lighting and 16000 DPI sensor.\",\r\n  \"price\": 49.99,\r\n  \"stock_quantity\": 120,\r\n  \"sku\": \"WGM-001\"\r\n}",
+              "raw": "{\r\n  \"category_id\": 3,\r\n  \"name\": \"Wireless Gaming Mouse\",\r\n  \"description\": \"High-performance wireless gaming mouse with RGB lighting and 16000 DPI sensor.\",\r\n  \"price\": 49.99,\r\n  \"stock_quantity\": 120,\r\n  \"sku\": \"WGM-001\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -131,13 +141,23 @@
           "response": []
         },
         {
-          "name": "Create Product - Negative Price",
+          "name": "Create Product - Customer Role (403)",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyIiwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNzg2MjE4MTgyLCJleHAiOjE3ODYyMjE3ODJ9.byNYMEnHsPCNpTkDZvYO6gnEeG1AR6kdsvw5haC4lhY",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"category_id\": 3,\r\n  \"name\": \"Wireless Gaming Mouse\",\r\n  \"description\": \"High-performance wireless gaming mouse with RGB lighting and 16000 DPI sensor.\",\r\n  \"price\": -49.99,\r\n  \"stock_quantity\": 120,\r\n  \"sku\": \"WGM-002\"\r\n}",
+              "raw": "{\r\n  \"category_id\": 3,\r\n  \"name\": \"Wireless Gaming Mouse\",\r\n  \"description\": \"High-performance wireless gaming mouse with RGB lighting and 16000 DPI sensor.\",\r\n  \"price\": 49.99,\r\n  \"stock_quantity\": 120,\r\n  \"sku\": \"WGM-001\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -160,42 +180,23 @@
           "response": []
         },
         {
-          "name": "Create Product - Negative Stock",
+          "name": "Create Product - Negative Price (400)",
           "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n  \"category_id\": 3,\r\n  \"name\": \"Wireless Gaming Mouse\",\r\n  \"description\": \"High-performance wireless gaming mouse with RGB lighting and 16000 DPI sensor.\",\r\n  \"price\": 49.99,\r\n  \"stock_quantity\": -10,\r\n  \"sku\": \"WGM-003\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg2MjE3OTYxLCJleHAiOjE3ODYyMjE1NjF9.efTnD0C8zEC17a3r0i8C8KQ3LKrJOB5u_3Pyfu6LYUM",
+                  "type": "string"
                 }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3000/api/products",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "products"
               ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Create Product - Duplicate SKU",
-          "request": {
+            },
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"category_id\": 3,\r\n  \"name\": \"Wireless Gaming Keyboard\",\r\n  \"description\": \"Mechanical gaming keyboard with RGB lighting and customizable keys.\",\r\n  \"price\": 89.99,\r\n  \"stock_quantity\": 50,\r\n  \"sku\": \"WGM-001\"\r\n}",
+              "raw": "{\r\n  \"category_id\": 3,\r\n  \"name\": \"Wireless Gaming Mouse\",\r\n  \"description\": \"High-performance wireless gaming mouse with RGB lighting and 16000 DPI sensor.\",\r\n  \"price\": -49.99,\r\n  \"stock_quantity\": 120,\r\n  \"sku\": \"WGM-001\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -491,64 +492,6 @@
           "response": []
         },
         {
-          "name": "Create User - Valid",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n  \"full_name\": \"Ahmad Khaled\",\r\n  \"email\": \"ahmad.khaled@gmail.com\",\r\n  \"phone\": \"0791234567\",\r\n  \"password_hash\": \"hashed_password_example\",\r\n  \"role\": \"customer\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3000/api/users",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "users"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Create User - Duplicate Email",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n  \"full_name\": \"Ahmad Khaled\",\r\n  \"email\": \"ahmad.khaled@gmail.com\",\r\n  \"phone\": \"0791234567\",\r\n  \"password_hash\": \"hashed_password_example\",\r\n  \"role\": \"customer\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3000/api/users",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "users"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
           "name": "Activate or de' a user",
           "request": {
             "method": "PATCH",
@@ -582,56 +525,162 @@
       ]
     },
     {
-      "name": "New Request",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:3000/api/HJGI",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "HJGI"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "General - Incomplete JSON",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"full_name\": \"Ahmad Khaled\",\r\n  \"email\": \"ahmad.khaled@gmail.com\",\r\n  \"phone\": \"0791234567\",\r\n  \"passwd_hash\": \"hashed_password_example\",\r\n  \"role\": \"customer\"\r\n",
-          "options": {
-            "raw": {
-              "language": "json"
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register New User (201)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"admin1@example.com\",\r\n  \"full_name\": \"admin\",\r\n  \"password\": \"admin@123\",\r\n  \"phone\": null,\r\n  \"role\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://localhost:3000/api/users",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "users"
-          ]
+        {
+          "name": "Login Wrong Password (401)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\" : \"admi\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Brute Force Login (429)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"ahmad.test@example.com\",\r\n    \"password\" : \"T9#vL2@qX7!mP4\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login Success (200) Copy",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\" : \"admin@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login Success (200)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\" : \"admin@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     },
     {
-      "name": "General - Unknown Route",
+      "name": "Route Not Found (404)",
       "request": {
         "method": "POST",
         "header": [],

@@ -26,12 +26,6 @@ async function getCategoryById(req, res) {
   try {
     const categoryId = Number(req.params.id);
 
-    if (!Number.isInteger(categoryId) || categoryId <= 0) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid category ID",
-      });
-    }
 
     const result = await pool.query(
       "SELECT * FROM categories WHERE id = $1", // $1 عشان الامان
@@ -58,13 +52,6 @@ async function getCategoryById(req, res) {
 async function createCategory(req, res) {
   try {
     const { name, description } = req.body;
-
-    if (!name) {
-      return res.status(400).json({
-        success: false,
-        message: "name are required",
-      });
-    }
 
     const result = await pool.query(
       `INSERT INTO categories 

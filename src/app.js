@@ -1,8 +1,44 @@
 const express = require("express");
+
 const cors = require("cors");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+
+const notFound = require("./middleware/notFound");
+const errorHandler = require("./middleware/errorHandler");
+
 const app = express();
 
-app.use(cors());
+app.use(helmet());
+
+app.use(cors({
+  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 min
+  max: 100, 
+  message: { 
+    success: false, 
+    message: "Too many requests, please try again later" 
+  }
+});
+
+app.use("/api", apiLimiter);
+
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 min
+  max: 5, 
+  message: { 
+    success: false, 
+    message: "Too many login attempts, please try again after 15 minutes" 
+  }
+});
+
+app.use("/api/auth/login", loginLimiter);
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -21,20 +57,12 @@ app.use("/api/categories", categoriesRoutes);
 const usersRoutes = require("./routes/usersRoutes");
 app.use("/api/users", usersRoutes); 
 
+const authRoutes = require("./routes/authRoutes");
+app.use("/api/auth", authRoutes);
 
-app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: "API route not found"
-  });
-});
 
-app.use((error, req, res, next) => {
-  console.error(error);
-  res.status(error.status || 500).json({
-    success: false,
-    message: error.message || "Internal server error"
-  });
-});
+app.use(notFound);
+
+app.use(errorHandler);
 
 module.exports = app;
