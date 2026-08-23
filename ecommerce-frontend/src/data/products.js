@@ -1,0 +1,22 @@
+export const products = [
+  { id: 1, name: "Dev Pro Laptop 16\"", description: "Perfect for .NET, Java and full-stack development.", price: 1200, stockQuantity: 15, category: "Laptops", image: "https://placehold.co/400?text=Laptop+16", isActive: true },
+  { id: 2, name: "Gaming Mech Keyboard", description: "Mechanical switches, optimal for CS and fast typing.", price: 150, stockQuantity: 25, category: "Gaming Gear", image: "https://placehold.co/400?text=Keyboard", isActive: true },
+  { id: 3, name: "Ultra-Fast Gigabit Router", description: "Low latency router for local network gaming and server hosting.", price: 85, stockQuantity: 10, category: "Networking", image: "https://placehold.co/400?text=Router", isActive: true },
+  { id: 4, name: "Cloud Server Book", description: "AWS Practitioner prep guide.", price: 40, stockQuantity: 0, category: "Accessories", image: "https://placehold.co/400?text=AWS+Book", isActive: true }, // Out of stock
+  { id: 5, name: "Noise Cancelling Headphones", description: "Block the noise, focus on your code.", price: 200, stockQuantity: 8, category: "Audio", image: "https://placehold.co/400?text=Headphones", isActive: true },
+  { id: 6, name: "Budget Coding Laptop", description: "Great for students and web dev.", price: 600, stockQuantity: 5, category: "Laptops", image: "https://placehold.co/400?text=Budget+Laptop", isActive: true },
+  { id: 7, name: "High-FPS Gaming Mouse", description: "Extra side buttons for quick actions.", price: 60, stockQuantity: 30, category: "Gaming Gear", image: "https://placehold.co/400?text=Mouse", isActive: true },
+  { id: 8, name: "27-inch 144Hz Monitor", description: "Smooth visuals for fast-paced games.", price: 250, stockQuantity: 12, category: "Accessories", image: "https://placehold.co/400?text=Monitor", isActive: true },
+  { id: 9, name: "Ethernet Cable 20m", description: "Zero lag connection.", price: 15, stockQuantity: 50, category: "Networking", image: "https://placehold.co/400?text=Cable", isActive: true },
+  { id: 10, name: "Studio Microphone", description: "Crystal clear voice for discord and streams.", price: 120, stockQuantity: 0, category: "Audio", image: "https://placehold.co/400?text=Mic", isActive: true }, // Out of stock
+  { id: 11, name: "Ergonomic Chair", description: "Support for long coding sessions.", price: 300, stockQuantity: 4, category: "Accessories", image: "https://placehold.co/400?text=Chair", isActive: true },
+  { id: 12, name: "Laptop Cooling Pad", description: "Keep your system cool under heavy load.", price: 35, stockQuantity: 20, category: "Accessories", image: "https://placehold.co/400?text=Cooling+Pad", isActive: true },
+  { id: 13, name: "Wireless Earbuds", description: "Compact and long battery life.", price: 90, stockQuantity: 18, category: "Audio", image: "https://placehold.co/400?text=Earbuds", isActive: true },
+  { id: 14, name: "Premium Thermal Paste", description: "For maximum CPU cooling efficiency.", price: 12, stockQuantity: 40, category: "Gaming Gear", image: "https://placehold.co/400?text=Thermal+Paste", isActive: true },
+  { id: 15, name: "Wi-Fi 6 Adapter", description: "Upgrade your desktop to Wi-Fi 6.", price: 45, stockQuantity: 15, category: "Networking", image: "https://placehold.co/400?text=WiFi+Adapter", isActive: true },
+  { id: 16, name: "1TB NVMe SSD", description: "Lightning fast storage for OS and games.", price: 110, stockQuantity: 22, category: "Accessories", image: "https://placehold.co/400?text=SSD", isActive: true },
+  { id: 17, name: "Dual Monitor Stand", description: "Perfect desk organization.", price: 55, stockQuantity: 8, category: "Accessories", image: "https://placehold.co/400?text=Monitor+Stand", isActive: true },
+  { id: 18, name: "Mechanical Switch Tester", description: "Find the perfect switch for your keyboard.", price: 10, stockQuantity: 3, category: "Gaming Gear", image: "https://placehold.co/400?text=Switch+Tester", isActive: true },
+  { id: 19, name: "Smart Home Hub", description: "Control your room lighting and network.", price: 130, stockQuantity: 7, category: "Networking", image: "https://placehold.co/400?text=Smart+Hub", isActive: true },
+  { id: 20, name: "Creator Pro Laptop", description: "Top tier specs for heavy rendering.", price: 2500, stockQuantity: 2, category: "Laptops", image: "https://placehold.co/400?text=Pro+Laptop", isActive: true }
+];
