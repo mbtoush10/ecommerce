@@ -1,16 +1,111 @@
-# React + Vite
+# 🦇 BAT TECHNO - متجر الأجهزة والملحقات التقنية
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+واجهة مستخدم حديثة ومتجاوبة لمتجر إلكتروني مبني باستخدام **React 19** و **Vite** مع **React Router 7**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📌 وصف المشروع
+مشروع تدريبي متكامل لواجهة متجر إلكتروني متخصص في بيع الأجهزة والملحقات التقنية للمبرمجين وصناع المحتوى واللاعبين. يعتمد المشروع كلياً في هذه المرحلة على **بيانات تجريبية (Mock Data)** تمهيداً لربطه بـ REST API في المرحلة القادمة.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ الأدوات والمكتبات المستخدمة
+- **React 19** (JSX, Hooks, Context API)
+- **Vite 8** (بيئة التطوير والبناء السريع)
+- **React Router 7** (`react-router-dom` للتنقل بين الصفحات والمسارات المحمية)
+- **Vanilla CSS / CSS Variables** (نظام تصميم Design System متكامل)
+- **LocalStorage API** (لحفظ ومزامنة سلة المشتريات والحسابات)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 💻 متطلبات التشغيل
+- Node.js (إصدار 18 فما فوق)
+- مدير الحزم npm
+
+---
+
+## 🚀 أوامر التثبيت والتشغيل والبناء
+
+```bash
+# 1. تثبيت الاعتماديات
+npm install
+
+# 2. تشغيل السيرفر المحلي في وضع التطوير
+npm run dev
+
+# 3. بناء المشروع للإنتاج
+npm run build
+
+# 4. معاينة نسخة الإنتاج المبنية
+npm run preview
+```
+
+---
+
+## 📂 بنية المجلدات (Folder Structure)
+
+```
+ecommerce-frontend/
+├── public/
+├── src/
+│   ├── assets/              # الصور والأيقونات
+│   ├── components/
+│   │   ├── common/          # مكونات عامة (ConfirmDialog, Toast, ProtectedRoute, CategoryCard)
+│   │   ├── layout/          # الهيكل العام (Navbar, Footer, Layout)
+│   │   └── products/        # مكونات المنتجات (ProductCard)
+│   ├── context/             # إدارة الحالة العامة (CartContext, AuthContext)
+│   ├── data/                # البيانات التجريبية المركزية (products, categories, users, orders)
+│   ├── pages/               # صفحات التطبيق
+│   │   ├── Home.jsx         # الرئيسية (Hero, Search, Categories, Featured, Banner, Latest)
+│   │   ├── Products.jsx     # المنتجات (Search, Filter, Price Range, Sort, Pagination)
+│   │   ├── ProductDetails.jsx # تفاصيل المنتج واختيار الكمية
+│   │   ├── Cart.jsx         # سلة المشتريات وتعديل الكميات والحذف
+│   │   ├── Checkout.jsx     # إتمام الطلب (ملخص، تفاصيل الشحن، الدفع)
+│   │   ├── Login.jsx        # تسجيل الدخول
+│   │   ├── Register.jsx     # إنشاء حساب جديد
+│   │   ├── Profile.jsx      # الملف الشخصي وتغيير كلمة المرور والطلبات
+│   │   ├── Dashboard.jsx    # لوحة تحكم الأدمن (إحصائيات، إضافة/تعديل منتج، إدارة طلبات وتصنيفات)
+│   │   └── NotFound.jsx     # صفحة 404
+│   ├── index.css            # متغيرات التصميم العامة والألوان
+│   ├── App.jsx              # المسارات العامة والمحمية
+│   └── main.jsx             # نقطة الدخول
+├── package.json
+└── README.md
+```
+
+---
+
+## 🌐 الصفحات والمسارات (Routes)
+
+| المسار | الصفحة | نوع الوصول |
+|---|---|---|
+| `/` | الرئيسية (Home) | عام |
+| `/products` | تصفح المنتجات (Products) | عام |
+| `/products/:id` | تفاصيل المنتج (Product Details) | عام |
+| `/cart` | سلة المشتريات (Cart) | عام |
+| `/checkout` | إتمام الطلب (Checkout) | عام (يتطلب عناصر بالسلة) |
+| `/login` | تسجيل الدخول (Login) | عام |
+| `/register` | إنشاء حساب (Register) | عام |
+| `/profile` | الملف الشخصي (Profile) | 🔒 محمي (يتطلب تسجيل دخول) |
+| `/admin` | لوحة تحكم الأدمن (Dashboard) | 🔒 محمي (يتطلب دور Admin فقط) |
+| `/*` | صفحة غير موجود (NotFound 404) | عام |
+
+---
+
+## 🔑 الحسابات التجريبية (Demo Accounts)
+
+| الحساب | البريد الإلكتروني | كلمة المرور | الدور |
+|---|---|---|---|
+| **حساب عميل (Customer)** | `customer@store.com` | `password123` | عميل (لا يمكنه دخول لوحة الأدمن) |
+| **حساب أدمن (Admin)** | `admin@store.com` | `password123` | مدير (يستطيع دخول كافة الأقسام ولوحة الإدارة) |
+
+*(ملاحظة: يمكنك أيضاً إنشاء حساب عميل جديد من صفحة التسجيل وتجربة الدخول به مباشرة!)*
+
+---
+
+## 🧩 المكونات الرئيسية وحالات الواجهة
+- **ProtectedRoute**: مكون حماية لمنع غير المسجلين والعملاء العاديين من دخول لوحة الإدارة.
+- **ConfirmDialog**: نافذة تأكيد مودال مخصصة لكافة عمليات الحذف والخروج والتعطيل.
+- **Toast**: نظام إشعارات عائم منبثق يختفي تلقائياً لعمليات السلة والنجاح والخطأ.
+- **Cart Context**: إدارة سلة مركزية تشتق الإجماليات ديناميكياً وتتزامن مع LocalStorage.
+- **Responsive Drawer / Hamburger**: قائمة تنقل للهاتف وفلاتر قابلة للطي على الشاشات الصغيرة.

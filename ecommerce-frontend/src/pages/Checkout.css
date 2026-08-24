@@ -1,0 +1,199 @@
+.checkout-container {
+  max-width: 650px;
+  margin: 40px auto;
+  padding: var(--spacing-xl);
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+}
+
+.checkout-title {
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+/* ملخص تفصيلي */
+.order-summary-detailed {
+  background-color: var(--background-color);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-lg);
+}
+
+.order-summary-detailed h3 {
+  font-size: 16px;
+  color: var(--primary-color);
+  margin-bottom: 12px;
+}
+
+.order-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.order-summary-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  padding: 6px 0;
+  border-bottom: 1px dashed #e5e7eb;
+}
+
+.item-name {
+  color: var(--text-color);
+}
+
+.item-subtotal {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.order-summary-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-color);
+  padding-top: 12px;
+  margin-top: 8px;
+  border-top: 2px solid var(--primary-color);
+}
+
+/* النموذج */
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.form-section-title {
+  font-size: 16px;
+  color: var(--primary-color);
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--secondary-color);
+  margin-top: var(--spacing-sm);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.form-input {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: var(--border-radius);
+  font-family: inherit;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.form-input:focus {
+  border-color: var(--secondary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(242, 169, 59, 0.15);
+}
+
+.form-group.has-error .form-input {
+  border-color: var(--error-color);
+}
+
+.form-group.has-error .form-input:focus {
+  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.15);
+}
+
+.field-error {
+  color: var(--error-color);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* طرق الدفع */
+.payment-methods {
+  display: flex;
+  gap: 12px;
+}
+
+.payment-option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px;
+  border: 2px solid #e5e7eb;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.payment-option:hover {
+  border-color: var(--secondary-color);
+}
+
+.payment-option.selected {
+  border-color: var(--secondary-color);
+  background: rgba(242, 169, 59, 0.08);
+}
+
+.payment-option input[type="radio"] {
+  accent-color: var(--secondary-color);
+}
+
+.card-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--background-color);
+  border-radius: var(--border-radius);
+}
+
+.card-row {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.card-row .form-group {
+  flex: 1;
+}
+
+.submit-order-btn {
+  background-color: var(--success-color);
+  color: white;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--border-radius);
+  margin-top: var(--spacing-md);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.submit-order-btn:hover {
+  background-color: #166534;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .checkout-container {
+    margin: 20px auto;
+    padding: var(--spacing-md);
+  }
+  .payment-methods {
+    flex-direction: column;
+  }
+  .card-row {
+    flex-direction: column;
+  }
+}

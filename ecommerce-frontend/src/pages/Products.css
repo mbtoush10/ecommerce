@@ -20,6 +20,16 @@
   font-weight: 500;
 }
 
+.mobile-filter-toggle {
+  display: none;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 14px;
+}
+
 .filters-bar {
   display: flex;
   flex-wrap: wrap;
@@ -55,6 +65,24 @@
 
 .filter-input:focus {
   border-color: var(--secondary-color);
+  outline: none;
+}
+
+/* فلتر السعر */
+.price-range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.price-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.price-separator {
+  color: var(--muted-text-color);
+  font-weight: 600;
 }
 
 .checkbox-group {
@@ -92,4 +120,69 @@
 .no-results h2 {
   color: var(--primary-color);
   margin-bottom: var(--spacing-sm);
+}
+
+/* --- Pagination --- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-md) 0;
+}
+
+.pagination-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d1d5db;
+  border-radius: var(--border-radius);
+  background: var(--surface-color);
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.pagination-btn:hover:not(:disabled) {
+  border-color: var(--secondary-color);
+  color: var(--secondary-color);
+}
+
+.pagination-btn.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .mobile-filter-toggle {
+    display: inline-block;
+  }
+
+  .filters-bar {
+    display: none;
+    flex-direction: column;
+  }
+
+  .filters-bar.filters-open {
+    display: flex;
+  }
+
+  .filter-group {
+    min-width: 100%;
+  }
+
+  .price-range-group {
+    min-width: 100%;
+  }
 }

@@ -12,46 +12,43 @@ export function CartProvider({ children }) {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  // دالة إضافة منتج للسلة (معدلة ومحسنة)
-  const addToCart = (product) => {
-    // 1. نفحص السلة الحالية قبل ما نعمل أي تعديل
+  // دالة إضافة منتج للسلة مع دعم الكمية المحددة
+  const addToCart = (product, quantityToAdd = 1) => {
     const existingItem = cart.find(item => item.id === product.id);
+    const currentQty = existingItem ? existingItem.quantity : 0;
+    const newTotalQty = currentQty + quantityToAdd;
+
+    if (newTotalQty > product.stockQuantity) {
+      return { 
+        success: false, 
+        message: `لا يمكنك تجاوز الكمية المتوفرة بالمخزون! المتبقي: ${product.stockQuantity - currentQty}` 
+      };
+    }
 
     if (existingItem) {
-      // 2. إذا المنتج موجود، بنشيك على المخزون أول
-      if (existingItem.quantity >= product.stockQuantity) {
-        alert('لا يمكنك تجاوز الكمية المتوفرة في المخزون!');
-        return; // بنوقف التنفيذ هون
-      }
-      
-      // 3. إذا أموره تمام، بنزيد الكمية
       setCart(prevCart => prevCart.map(item => 
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        item.id === product.id ? { ...item, quantity: item.quantity + quantityToAdd } : item
       ));
-      alert('تمت زيادة كمية المنتج في السلة!');
-      
+      return { success: true, message: `تمت إضافة ${quantityToAdd} قطعة إلى السلة بنجاح!` };
     } else {
-      // 4. إذا المنتج جديد كلياً
-      setCart(prevCart => [...prevCart, { ...product, quantity: 1 }]);
-      alert('تمت إضافة المنتج للسلة بنجاح!');
+      setCart(prevCart => [...prevCart, { ...product, quantity: quantityToAdd }]);
+      return { success: true, message: 'تمت إضافة المنتج للسلة بنجاح!' };
     }
   };
 
   const updateQuantity = (id, newQuantity, stockQuantity) => {
     if (newQuantity < 1) return;
     if (newQuantity > stockQuantity) {
-      alert('عذراً، الكمية المطلوبة غير متوفرة بالمخزون!');
-      return;
+      return { success: false, message: 'عذراً، الكمية المطلوبة غير متوفرة بالمخزون!' };
     }
     setCart(prevCart => 
       prevCart.map(item => item.id === id ? { ...item, quantity: newQuantity } : item)
     );
+    return { success: true };
   };
 
   const removeFromCart = (id) => {
-    if(window.confirm('هل أنت متأكد من حذف هذا المنتج من السلة؟')) {
-      setCart(prevCart => prevCart.filter(item => item.id !== id));
-    }
+    setCart(prevCart => prevCart.filter(item => item.id !== id));
   };
 
   const clearCart = () => {

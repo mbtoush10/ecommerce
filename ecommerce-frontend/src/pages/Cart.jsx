@@ -1,9 +1,30 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import ConfirmDialog from '../components/common/ConfirmDialog';
+import Toast from '../components/common/Toast';
 import './Cart.css';
 
 export default function Cart() {
   const { cart, updateQuantity, removeFromCart, cartTotal } = useCart();
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, itemId: null, itemName: '' });
+  const [toast, setToast] = useState({ isVisible: false, message: '', type: 'success' });
+
+  const handleRemoveClick = (itemId, itemName) => {
+    setConfirmDialog({ isOpen: true, itemId, itemName });
+  };
+
+  const handleConfirmRemove = () => {
+    removeFromCart(confirmDialog.itemId);
+    setConfirmDialog({ isOpen: false, itemId: null, itemName: '' });
+  };
+
+  const handleUpdateQuantity = (id, newQty, stockQty) => {
+    const result = updateQuantity(id, newQty, stockQty);
+    if (result && !result.success) {
+      setToast({ isVisible: true, message: result.message, type: 'warning' });
+    }
+  };
 
   // تصميم حالة السلة الفارغة (Empty State)
   if (cart.length === 0) {
@@ -18,6 +39,24 @@ export default function Cart() {
 
   return (
     <div className="cart-page container">
+      <Toast 
+        message={toast.message} 
+        type={toast.type} 
+        isVisible={toast.isVisible} 
+        onClose={() => setToast({ ...toast, isVisible: false })} 
+      />
+      
+      <ConfirmDialog
+        isOpen={confirmDialog.isOpen}
+        title="حذف المنتج"
+        message={`هل أنت متأكد من حذف "${confirmDialog.itemName}" من السلة؟`}
+        confirmText="حذف"
+        cancelText="إلغاء"
+        variant="danger"
+        onConfirm={handleConfirmRemove}
+        onCancel={() => setConfirmDialog({ isOpen: false, itemId: null, itemName: '' })}
+      />
+
       <h1 className="cart-title">سلة المشتريات</h1>
       
       <div className="cart-container">
@@ -35,16 +74,18 @@ export default function Cart() {
                 <div className="quantity-controls">
                   <button 
                     className="qty-btn" 
-                    onClick={() => updateQuantity(item.id, item.quantity - 1, item.stockQuantity)}
+                    onClick={() => handleUpdateQuantity(item.id, item.quantity - 1, item.stockQuantity)}
+                    aria-label="تقليل الكمية"
                   >-</button>
                   <span>{item.quantity}</span>
                   <button 
                     className="qty-btn" 
-                    onClick={() => updateQuantity(item.id, item.quantity + 1, item.stockQuantity)}
+                    onClick={() => handleUpdateQuantity(item.id, item.quantity + 1, item.stockQuantity)}
+                    aria-label="زيادة الكمية"
                   >+</button>
                 </div>
                 
-                <button className="remove-btn" onClick={() => removeFromCart(item.id)}>
+                <button className="remove-btn" onClick={() => handleRemoveClick(item.id, item.name)}>
                   حذف المنتج
                 </button>
               </div>
